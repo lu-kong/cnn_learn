@@ -1,72 +1,81 @@
-#this is the personnal note for W1 of CNN at COURSERA
+# This is the personnal note for W1 of CNN at COURSERA
 
-## CNN
+## 1. Computer vision problem
+The procesuss of using a filter or kernal to modifiing the original pictures is called "convolution":
+* in Python: conv-forword
+* in tensorflow: tf.nn.con2d
 
-### Computer vision problem
-The procesuss of using a filter or kernal to modifiing the original pictures is called "convolution"
-in Python: conv-forword
-in tensorflow: tf.nn.con2d
+e.g  
+> [[1 1 -1],  
+>  [1 0 -1],  
+>  [1 0 -1]]  
 
-e.g
-[[1 1 -1],
- [1 0 -1],
- [1 0 -1]] is a vertical edge detector #enhence the vertical edges so after the convolution with this 
+is a vertical edge detector #enhence the vertical edges so after the convolution with this 
  filter all the charactor with vertical property will show up more clearly
  
-### More Edge Detection
-Sobel filter
-[[1 0 -1],
- [2 0 -2],
- [1 0 -1]]
+## 2. More Edge Detection
+Sobel filter  
 
-Schass filter
-[[3 0 -3],
- [10 0 -10],
- [3 0 -3]] 
+[[1 0  -1],  
+ [2 0 -2],  
+ [1 0 -1]]  
  
-###Padding
-size of pictures : n*n
-size of filters  : f*f
-so the output after the convolution size of (n - f + 1) *(n - f + 1)
 
-So there are clearly two results of doing convolution
--1. Shrink output 
--2. Throug away a lot of information from edges
+Schass filter  
+[[3 0 -3],  
+ [10 0 -10],  
+ [3 0 -3]]  
+ 
+## 3. Padding
+* size of pictures : n\*n
+* size of filters  : f\*f
+so the output after the convolution size of  
+ $(n - f + 1) *(n - f + 1)$
 
-In order to fix this problem:
-we pad the image --> p = padding
-if we take a padding = p = 1
-so the size of image is transfered to (n + 2*p)^2
-in return, out put size is still n*n
+So there are clearly two results of doing convolution  
+* Shrink output 
+* Throug away a lot of information from edges
 
-* Valid and Same convolutions
-Valid = no padding
-Same  = n+2p-f+1 = n  ==> 2p = f-1
-*filter size is usually odd #it's nice to have a centre pixel
+In order to fix this problem:  
+we pad the image $\rightarrow p = padding$  
+if we take a padding $= p = 1$  
+so the size of image is transfered to $(n + 2p)*(n+2p)$  
+in return, out put size is still $\rightarrow n*n$
 
-### Strided Convolutions
-Strip = 2
+**Valid and Same convolutions**
+1. Valid $\Leftrightarrow$ no padding
+1. Same  $\Leftrightarrow  n+2p-f+1 = n\Rightarrow 2p = f-1$  
+*filter size is usually odd* #it's nice to have a centre pixel
+
+## 4. Strided Convolutions
+Strip = 2  
 jump strip times  跳过一行计算，中心直接隔开一个
-
-(n+2p-f)/s+1 * (n+2p-f)/s+1
-
+$$
+\left( \frac{n+2p-f}{s}+1\right) * \left(\frac{n+2p-f}{s}+1\right)
+$$
 We can also note it as cross-correlation
 
-###Convolutions Over Volume
-*on RGB images there are channels!
+## 5. Convolutions Over Volume
+- **on RGB images there are channels!**  
 so  we make the filtre of 3 channels, too. 
-we make it like a filter cube 
+we make it like a filter cube and the output is just 2D
 
-and the output is just 2D
-*Multiple filters
+- **Multiple filters**  
 When we have many different filters at the same time 
 ==> make the output of different filters into different channels of the output.
 
-### One layer of a convolutional NN
+## 6. One layer of a convolutional NN
 if layer l is a convolutional layer:
 
-f^[l] = filter size of layer l
-p^[l] = padding 
-s^[l] = stride
-nc^[l]= number of filters
+- $f^l$ = filter size of layer l  
+- $p^l$ = padding
+- $s^l$ = stride
+- $n_c^l$= number of filters
 
+- [ ] hello
+
+## 7. Simple convolutional network
+**types of layers in a convolutional network**
+* Convolution
+* Pooling
+* Fully connected 
